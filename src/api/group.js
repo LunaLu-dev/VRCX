@@ -159,6 +159,22 @@ const groupReq = {
             return args;
         });
     },
+
+    /**
+     * @param {{ groupId: string }} params
+     * @return { Promise<{json: any, params}> }
+     */
+    subscribeGroupEvent(params) {
+        return request(`calendar/grp_b33be984-4b29-46f2-a19b-3acfff8aac00/cal_ede1ed2d-c045-4298-a640-7441f9b88d1b/follow`, {
+            method: 'POST'
+        }).then((json) => {
+            const args = {
+                json,
+                params
+            };
+            return args;
+        });
+    },
     /**
      * @param {{ query: string }} params
      * @return { Promise<{json: any, params}> }

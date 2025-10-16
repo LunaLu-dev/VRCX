@@ -49,11 +49,14 @@
         <div v-if="isFollowing" class="following-badge">
             <el-icon><Check /></el-icon>
         </div>
+        <div v-if="!isFollowing" class="add-as-following-badge" @onClick="toggleRsvpStatus()">
+          <el-icon><Plus /></el-icon>
+        </div>
     </el-card>
 </template>
 
 <script setup>
-    import { Check } from '@element-plus/icons-vue';
+    import { Check, Plus } from '@element-plus/icons-vue';
     import { computed } from 'vue';
     import { useI18n } from 'vue-i18n';
 
@@ -62,7 +65,7 @@
     import { useGroupStore } from '../../../stores';
 
     const { t } = useI18n();
-    const { cachedGroups, showGroupDialog } = useGroupStore();
+    const { cachedGroups, showGroupDialog, subscribeGroupEvent } = useGroupStore();
 
     const props = defineProps({
         event: {
@@ -119,6 +122,11 @@
     const onGroupClick = () => {
         showGroupDialog(props.event.ownerId);
     };
+    
+    const toggleRsvpStatus = () => {
+      subscribeGroupEvent(props.event.ownerId);
+      props.isFollowing = true;
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -167,7 +175,28 @@
             font-size: 14px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             z-index: 10;
+            cursor: pointer;
         }
+        .add-as-following-badge {
+          position: absolute;
+          top: -8px;
+          right: -9px;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background-color: #4cc6df;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 14px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          z-index: 10;
+          cursor: pointer;
+        }
+      .add-as-following-badge:hover {
+          background-color: #ff0000;
+      }
         .event-content {
             font-size: 12px;
             .timeline-view & {
