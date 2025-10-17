@@ -159,14 +159,16 @@ const groupReq = {
             return args;
         });
     },
-
     /**
-     * @param {{ groupId: string }} params
+     * @param {{ groupId: string, isFollowing: bool }} params
      * @return { Promise<{json: any, params}> }
      */
+    
+    //TODO: FIX CODE
     subscribeGroupEvent(params) {
         return request(`calendar/grp_b33be984-4b29-46f2-a19b-3acfff8aac00/cal_ede1ed2d-c045-4298-a640-7441f9b88d1b/follow`, {
-            method: 'POST'
+            method: 'POST',
+            body: JSON.stringify({ isFollowing: true })
         }).then((json) => {
             const args = {
                 json,

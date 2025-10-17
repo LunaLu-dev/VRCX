@@ -123,10 +123,12 @@
         showGroupDialog(props.event.ownerId);
     };
     
+    //TODO: Fix Code
     const toggleRsvpStatus = () => {
       subscribeGroupEvent(props.event.ownerId);
-      props.isFollowing = true;
     }
+
+    
 </script>
 
 <style lang="scss" scoped>
@@ -194,9 +196,6 @@
           z-index: 10;
           cursor: pointer;
         }
-      .add-as-following-badge:hover {
-          background-color: #ff0000;
-      }
         .event-content {
             font-size: 12px;
             .timeline-view & {
